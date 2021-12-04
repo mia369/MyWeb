@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>欢迎注册</title>
+</head>
+<body>
+<h1>欢迎注册</h1>
+<span>已有账号?点击登录</span><a href="login.html">登录</a>
+<form action="/CookieDemo/registerServlet" method="post">
+  <table>
+    <tr>
+      <td>用户名</td>
+      <td>
+        <input id="username" name="username" type="text" >
+<!--        <br>-->
+<!--        <span id="username_err" style="color: brown">用户名已存在</span>-->
+      </td>
+    </tr>
+
+    <tr>
+      <td>密码</td>
+      <td>
+        <input id="password" name="password" type="password">
+<!--        <br>-->
+<!--        <span id="password_err">密码格式有误</span>-->
+      </td>
+    </tr>
+  </table>
+
+  <input value="注  册" type="submit">
+  <br>
+</form>
+</body>
+</html>

@@ -1,0 +1,19 @@
+package com.ht.service;
+
+import com.ht.mapper.UserMapper01;
+import com.ht.pojo.User;
+import com.ht.utils.SqlSessionFactoryUtil;
+import org.apache.ibatis.session.SqlSession;
+import org.apache.ibatis.session.SqlSessionFactory;
+
+public class UserService {
+    SqlSessionFactory sqlSessionFactory = SqlSessionFactoryUtil.getSqlSessionFactory();
+
+    public User login(String username, String password) {
+        SqlSession sqlSession = sqlSessionFactory.openSession();
+        UserMapper01 userMapper01 = sqlSession.getMapper(UserMapper01.class);
+        User user = userMapper01.login(username, password);
+        sqlSession.close();
+        return user;
+    }
+}
