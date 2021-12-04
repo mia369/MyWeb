@@ -16,4 +16,17 @@ public class UserService {
         sqlSession.close();
         return user;
     }
+
+    public boolean register(User user) {
+        SqlSession sqlSession = sqlSessionFactory.openSession();
+        UserMapper01 userMapper01 = sqlSession.getMapper(UserMapper01.class);
+        //判断用户名是否存在
+        User user01 = userMapper01.selectByUsername(user.getUsername());
+        if (user01 == null) {
+            userMapper01.add(user);
+            sqlSession.commit();
+        }
+        sqlSession.close();
+        return user01 == null;
+    }
 }

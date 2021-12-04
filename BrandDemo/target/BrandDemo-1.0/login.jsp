@@ -14,6 +14,7 @@
 <body>
 <form action="/BrandDemo/loginServlet" method="post" id="form">
     <h1>LOG IN</h1>
+    <span id="register_ok" style="color: brown">${login_msg}</span>
 
     <p>Username:<input id="username" name="username" value="${cookie.username.value}" type="text"></p>
 
@@ -23,7 +24,7 @@
 
     <input type="submit" class="button" value="submit">
     <input type="reset" class="button" value="reset">
-    <a href="register.html">没有账号? 点击注册</a>
+    <a href="register.jsp">没有账号? 点击注册</a>
 </form>
 </body>
 </html>

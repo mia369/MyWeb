@@ -2,6 +2,7 @@ package com.ht.web;
 
 import com.ht.mapper.UserMapper01;
 import com.ht.pojo.User;
+import com.ht.service.UserService;
 import com.ht.utils.SqlSessionFactoryUtil;
 import org.apache.ibatis.session.SqlSession;
 import org.apache.ibatis.session.SqlSessionFactory;
@@ -16,6 +17,8 @@ import java.io.PrintWriter;
 
 @WebServlet("/registerServlet")
 public class RegisterServlet extends HttpServlet {
+    UserService userService = new UserService();
+
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
         //1.接收用户名和密码
@@ -27,34 +30,18 @@ public class RegisterServlet extends HttpServlet {
         user.setUsername(username);
         user.setPassword(password);
 
-        //2.调用mybatis完成查询
-        //2.1 获取sqlSessionFactory对象
-//        InputStream inputStream = Resources.getResourceAsStream("mybatis-config.xml");
-//        SqlSessionFactory sqlSessionFactory = new SqlSessionFactoryBuilder().build(inputStream);
-        SqlSessionFactory sqlSessionFactory = SqlSessionFactoryUtil.getSqlSessionFactory();
+        //2.调用service完成注册
+        boolean flag = userService.register(user);
 
-        //2.2 获取sqlsession对象
-        SqlSession sqlSession = sqlSessionFactory.openSession();
-
-        //2.3 获取mapper对象
-        UserMapper01 userMapper = sqlSession.getMapper(UserMapper01.class);
-
-        //2.4 调用查询方法, 判断用户是否存在, 存在则返回msg, 不存在则继续调用add方法
-
-        response.setContentType("text/html;charset=utf-8");
-        PrintWriter printWriter = response.getWriter();
-        User u = userMapper.selectByUsername(username);
-        if (null == u) {
-            userMapper.add(user);
-            sqlSession.commit();
-            printWriter.write("注册成功");
-            sqlSession.close();
+        if (flag) {
+            //注册成功 跳转到登录页面
+            request.setAttribute("login_msg", "注册成功, 请登录");
+            request.getRequestDispatcher("/login.jsp").forward(request, response);
         } else {
-            printWriter.write("用户名已存在");
+            //注册失败 跳转到登录页面
+            request.setAttribute("register_msg","用户名已存在");
+            request.getRequestDispatcher("/register.jsp").forward(request, response);
         }
-
-        //2.5 关闭sqlsession资源
-
 
     }
 
