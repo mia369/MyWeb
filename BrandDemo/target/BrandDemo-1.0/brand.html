@@ -1,0 +1,67 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+<input id="addItem" type="button" value="新增"><br>
+
+<!--使用ajax向servlet发送异步请求,使用json接收数据库对象-->
+<script src="js/axios.js"></script>
+
+<table id="table" border="1" cellspacing="0" width="800">
+
+
+</table>
+
+<script>
+    window.onload = function () {
+
+        axios({
+            method: "get",
+            url: "http://localhost:8080/BrandDemo/selectAllServlet01"
+        }).then(function (resp) {
+            //接收的是对象数组
+            let brands = resp.data;
+            //创建容器拼接字符串
+            let tableData = "<tr>\n" +
+                "        <th>序号</th>\n" +
+                "        <th>品牌名称</th>\n" +
+                "        <th>企业名称</th>\n" +
+                "        <th>排序</th>\n" +
+                "        <th>品牌介绍</th>\n" +
+                "        <th>状态</th>\n" +
+                "        <th>操作</th>\n" +
+                "    </tr>"
+            //遍历对象数组, 拼接字符串
+            for (let i = 0; i < brands.length; i++) {
+                let brand = brands[i];
+                let flag = brand.status;
+                if (flag == 1) {
+                    flag = "启用";
+                } else {
+                    flag = "禁用";
+                }
+                tableData += "<tr align=\"center\">\n" +
+                    "        <td>" + (i + 1) + "</td>\n" +
+                    "        <td>" + brand.brandName + "</td>\n" +
+                    "        <td>" + brand.companyName + "</td>\n" +
+                    "        <td>" + brand.ordered + "</td>\n" +
+                    "        <td>" + brand.description + "</td>\n" +
+                    "        <td>" + flag + "</td>\n" +
+                    "        <td><a href=\"#\">修改</a><a href=\"#\">删除</a></td>" +
+                    "    </tr>"
+            }
+            document.getElementById("table").innerHTML = tableData;
+        })
+    }
+
+    document.getElementById("addItem").onclick = function () {
+        location.href = "/BrandDemo/addBrand.html";
+    }
+
+</script>
+
+</body>
+</html>
