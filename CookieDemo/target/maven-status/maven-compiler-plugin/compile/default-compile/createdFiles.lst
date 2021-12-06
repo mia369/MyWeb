@@ -1,5 +1,8 @@
-com\ht\cookie\BServlet.class
-com\ht\session\CServlet.class
-com\ht\cookie\AServlet.class
+com\ht\web\VerifyUsernameServlet.class
+com\ht\web\AjaxServlet.class
+com\ht\web\session\CServlet.class
+com\ht\web\cookie\BServlet.class
+com\ht\web\cookie\AServlet.class
+com\ht\web\AxiosServlet.class
+com\ht\web\session\DServlet.class
 com\ht\utils\SqlSessionFactoryUtil.class
-com\ht\session\DServlet.class

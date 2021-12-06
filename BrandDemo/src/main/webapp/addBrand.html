@@ -1,0 +1,70 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>添加品牌</title>
+</head>
+<body>
+
+<!--使用ajax-->
+
+<script src="js/axios.js"></script>
+
+<h3>添加品牌</h3>
+<form action="" method="post">
+    品牌名称: <input id="brandName"><br>
+    企业名称: <input id="companyName"><br>
+    排序: <input id="ordered"><br>
+    描述信息: <textarea rows="5" cols="20" id="description"></textarea><br>
+    状态:<input type="radio" name="status" value="0">禁用
+    <input type="radio" name="status" value="1">启用<br>
+
+    <input id="btn" type="button" value="提交">
+</form>
+
+<script>
+    document.getElementById("btn").onclick = function () {
+
+        //将填入的数据序列化为json字符串
+        var formData = {
+            brandName: "",
+            companyName: "",
+            ordered: "",
+            description: "",
+            status: ""
+        };
+
+        formData.brandName = document.getElementById("brandName").value;
+        formData.companyName = document.getElementById("companyName").value;
+        formData.ordered = document.getElementById("ordered").value;
+        formData.description = document.getElementById("description").value;
+        var status = document.getElementsByName("status");
+        for (let i = 0; i < status.length; i++) {
+            if (status[i].checked) {
+                formData.status = status[i].value;
+            }
+        }
+
+
+        axios({
+            method: "post",
+            url: "http://localhost:8080/BrandDemo/addServlet01",
+            data: formData
+        }).then(function (resp) {
+            if (resp.data == "success") {
+                //跳转到brand.html
+                location.href = "http://localhost:8080/BrandDemo/brand.html"
+            } else {
+                //弹框提示添加失败
+                alert("添加失败");
+            }
+
+        })
+
+    }
+
+
+</script>
+
+</body>
+</html>

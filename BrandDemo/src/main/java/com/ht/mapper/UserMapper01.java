@@ -12,10 +12,12 @@ public interface UserMapper01 {
     User login(@Param("username") String username, @Param("password") String password);
 
     //根据用户名查找用户
-    @Select("select * from tb_user where username=#{username};")
+    @Select("select * from tb_user where username=#{username}")
     User selectByUsername(String username);
 
     //添加用户
-    @Insert("insert into tb_user values (null, #{username}, #{password}) ;")
+    @Insert("insert into tb_user values (null, #{username}, #{password})")
     void add(User user);
+
+
 }

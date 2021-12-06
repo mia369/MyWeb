@@ -4,11 +4,14 @@ com\ht\web\SelectAllServlet.class
 com\ht\mapper\UserMapper01.class
 com\ht\web\SelectByIdServlet.class
 com\ht\service\BrandService.class
+com\ht\web\SelectAllServlet01.class
 com\ht\pojo\User.class
+com\ht\web\AddServlet01.class
 com\ht\mapper\BrandMapper01.class
 com\ht\web\DeleteServlet.class
 com\ht\web\RegisterServlet.class
 com\ht\utils\SqlSessionFactoryUtil.class
 com\ht\web\UpdateServlet.class
+com\ht\web\LogoutServlet.class
 com\ht\pojo\Brand.class
 com\ht\web\AddServlet.class

@@ -16,6 +16,7 @@
 <h1>${user.username}, 欢迎您</h1>
 
 <input id="add" type="button" value="新增"><br>
+<input id="logout" type="button" value="注销账号"><br>
 <hr>
 <table border="1" cellspacing="0" width="800">
 
@@ -53,6 +54,12 @@
         location.href = "/BrandDemo/addBrand.jsp";
     }
 
+    document.getElementById("logout").onclick = function () {
+        var flag = confirm("确认注销?");
+        if (flag) {
+            location.href = "/BrandDemo/logoutServlet";
+        }
+    }
 
 </script>
 
